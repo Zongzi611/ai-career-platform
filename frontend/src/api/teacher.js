@@ -1,0 +1,16 @@
+import request from './request'
+
+export const getStudents = (params) => request.get('/teacher/students', { params })
+export const addStudent = (data) => request.post('/teacher/students', data)
+export const removeStudent = (id) => request.delete(`/teacher/students/${id}`)
+export const getTasks = (params) => request.get('/teacher/tasks', { params })
+export const createTask = (data) => request.post('/teacher/tasks', data)
+export const updateTask = (id, data) => request.put(`/teacher/tasks/${id}`, data)
+export const deleteTask = (id) => request.delete(`/teacher/tasks/${id}`)
+export const getTaskProgress = (id) => request.get(`/teacher/tasks/${id}/progress`)
+export const getReports = (params) => request.get('/teacher/reports', { params })
+export const createReport = (data) => request.post('/teacher/reports', data)
+export const getReport = (id) => request.get(`/teacher/reports/${id}`)
+export const deleteReport = (id) => request.delete(`/teacher/reports/${id}`)
+export const getDashboardOverview = () => request.get('/dashboard/overview')
+export const exportStudents = (className) => request.get('/teacher/export/students', { params: { className }, responseType: 'blob' })

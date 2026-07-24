@@ -1,0 +1,96 @@
+# ============================================================
+# CareerSail 大学生职业规划智能体 — 通用配置
+# ============================================================
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: careersail-career-planning
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  # Redis 通用配置 (具体连接信息按 profile 覆盖)
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 5
+      timeout: 5000ms
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000
+      cache-null-values: false
+
+  # Spring AI 通用
+  ai:
+    retry:
+      max-attempts: 2
+      backoff:
+        initial-interval: 1000
+        multiplier: 2
+
+# MyBatis-Plus
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+# JWT
+jwt:
+  secret: ${JWT_SECRET:careersail-jwt-secret-key-must-be-at-least-256-bits-long-for-hs256}
+  expiration: 86400000
+  refresh-expiration: 604800000
+
+# CareerSail 自定义配置
+qkc:
+  ai:
+    provider: ${AI_PROVIDER:tongyi}
+    model-name: ${AI_MODEL_NAME:qwen-plus}
+    temperature: 0.7
+    max-tokens: 2000
+
+  chroma:
+    collection-name: career_knowledge
+    similarity-threshold: 0.65
+
+  chat:
+    max-history-messages: 20
+    session-expire-days: 30
+
+  assessment:
+    report-cache-hours: 24
+
+  training:
+    max-answer-length: 5000
+
+  upload:
+    avatar-max-size: 2MB
+    excel-max-size: 5MB
