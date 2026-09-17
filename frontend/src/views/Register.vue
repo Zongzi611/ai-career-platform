@@ -62,7 +62,6 @@
             </el-row>
             <el-row :gutter="12">
               <el-col :span="12">
-                <el-form-item><el-input v-model="form.className" placeholder="班级" size="large" /></el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item><el-input v-model="form.studentNo" placeholder="学号" size="large" /></el-form-item>
